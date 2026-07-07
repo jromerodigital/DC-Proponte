@@ -55,7 +55,7 @@ export default function Uses() {
             </h2>
           </div>
           <p className="font-sans text-sm text-proponte-charcoal/70 max-w-sm mt-3 md:mt-0 leading-relaxed">
-            Tu esfuerzo merece el mejor respaldo. Financia los activos más importantes de tu vida con el sistema Proponte.
+            Tu esfuerzo merece el mejor respaldo. Autofinancia los activos más importantes de tu vida con el sistema Proponte.
           </p>
         </div>
 
