@@ -30,10 +30,10 @@ export default function App() {
       <footer className="w-full bg-proponte-charcoal text-proponte-silver py-12 px-6 border-t border-proponte-silver/10">
         <div className="max-w-5xl mx-auto flex flex-col items-center text-center space-y-6">
           
-          {/* Logo representation */}
+          {/* Logo representation - Relative Path */}
           <div className="flex items-center space-x-2">
             <img
-              src="/logo_negativo_2026.png"
+              src="./logo_negativo_2026.png"
               alt="Proponte EAFC"
               className="h-10 w-auto object-contain"
             />

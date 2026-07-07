@@ -10,7 +10,7 @@ export default function Uses() {
       title: "Autos Nuevos y Seminuevos",
       description: "Planifica la compra del vehículo ideal para tu familia o negocio. Adquiere cualquier marca y modelo del mercado nacional de forma estructurada.",
       icon: <Car className="w-5 h-5 text-proponte-yellow" />,
-      image: "/autos.png",
+      image: "./autos.png",
       tag: "VEHÍCULOS",
       accent: "from-proponte-yellow to-proponte-gold"
     },
@@ -18,7 +18,7 @@ export default function Uses() {
       title: "Proyectos Inmobiliarios",
       description: "Compra, construye o remodela tu departamento, casa o local comercial. Asegura tu patrimonio inmobiliario sin deudas bancarias de por vida.",
       icon: <Home className="w-5 h-5 text-proponte-yellow" />,
-      image: "/inmuebles.png",
+      image: "./inmuebles.png",
       tag: "INMUEBLES",
       accent: "from-proponte-gold to-proponte-orange-gold"
     },
@@ -26,7 +26,7 @@ export default function Uses() {
       title: "Maquinaria y Activos",
       description: "Adquiere maquinaria pesada, equipos tecnológicos o vehículos industriales. Ideal para empresas que buscan expandirse sin descapitalizarse.",
       icon: <Truck className="w-5 h-5 text-proponte-yellow" />,
-      image: "/maquinaria.png",
+      image: "./maquinaria.png",
       tag: "ACTIVOS COMERCIALES",
       accent: "from-proponte-orange-gold to-proponte-yellow"
     }

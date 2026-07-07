@@ -13,7 +13,7 @@ export default function Header() {
         {/* Left spacing for centering on desktop */}
         <div className="hidden md:block w-28" />
 
-        {/* Center: Official Negative Brand Logo (Local File) - Compact on Mobile */}
+        {/* Center: Official Negative Brand Logo (Local File) - Relative Path for Subpaths */}
         <motion.div
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,9 +21,9 @@ export default function Header() {
           className="flex items-center justify-center select-none"
         >
           <img
-            src="/logo_negativo_2026.png"
+            src="./logo_negativo_2026.png"
             alt="Proponte EAFC"
-            className="h-8 md:h-11 w-auto object-contain"
+            className="h-12 md:h-14 w-auto object-contain"
             onError={(e) => {
               e.target.style.display = 'none';
               e.target.nextSibling.style.display = 'flex';
@@ -35,7 +35,7 @@ export default function Header() {
             <span className="font-sans font-black tracking-widest text-xl text-proponte-white">
               PROPONTE
             </span>
-            <span className="font-sans text-[8px] tracking-[0.2em] font-bold text-proponte-yellow mt-0.5">
+            <span className="font-sans text-[8px] tracking-[0.25em] font-bold text-proponte-yellow mt-0.5">
               EAFC • FONDOS COLECTIVOS
             </span>
           </div>
