@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-proponte-yellow: #FFD100;
+  --color-proponte-gold: #E5B800;
+  --color-proponte-orange-gold: #F5A400;
+  --color-proponte-charcoal: #2A2E34;
+  --color-proponte-black: #111111;
+  --color-proponte-silver: #BDC0C3;
+  --color-proponte-bg-warm: #F8F6F0;
+  --color-proponte-white: #FFFFFF;
+
+  --font-sans: 'Outfit', 'Inter', sans-serif;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce-slow: bounce 2s infinite;
+}
+
+:root {
+  --proponte-yellow: #FFD100;
+  --proponte-gold: #E5B800;
+  --proponte-orange-gold: #F5A400;
+  --proponte-charcoal: #2A2E34;
+  --proponte-black: #111111;
+  --proponte-silver: #BDC0C3;
+  --proponte-bg-warm: #F8F6F0;
+  --proponte-white: #FFFFFF;
+}
+
+body {
+  background-color: var(--proponte-bg-warm);
+  color: var(--proponte-charcoal);
+  font-family: 'Outfit', 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar to keep layout premium */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--proponte-bg-warm);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--proponte-silver);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--proponte-charcoal);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
