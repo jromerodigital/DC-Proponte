@@ -4,10 +4,11 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Uses from './components/Uses';
 import Timeline from './components/Timeline';
+import WhatsAppFloating from './components/WhatsAppFloating';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-proponte-bg-warm flex flex-col font-sans select-none text-proponte-charcoal pb-12">
+    <div className="min-h-screen bg-proponte-bg-warm flex flex-col font-sans select-none text-proponte-charcoal pb-12 relative">
       {/* Premium Header */}
       <Header />
 
@@ -25,6 +26,9 @@ export default function App() {
         {/* Timeline Next Steps */}
         <Timeline />
       </main>
+
+      {/* Floating WhatsApp Action Button */}
+      <WhatsAppFloating />
 
       {/* Trust Footer (Non-floating corporate text) */}
       <footer className="w-full bg-proponte-charcoal text-proponte-silver py-12 px-6 border-t border-proponte-silver/10">
