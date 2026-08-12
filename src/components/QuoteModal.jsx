@@ -49,8 +49,8 @@ export default function QuoteModal({ isOpen, onClose }) {
       fechaEnvio: new Date().toISOString(),
     };
 
-    // Webhook destination URL (can be customized or configured via env)
-    const WEBHOOK_URL = 'https://webhook.site/sample-proponte-lead-cotizador';
+    // Make.com Webhook destination URL
+    const WEBHOOK_URL = 'https://hook.us1.make.com/spsag557t8jwpt621bd4s2fu3vu54c8o';
 
     try {
       // Send JSON payload via Webhook
