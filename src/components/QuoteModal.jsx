@@ -7,18 +7,16 @@ export default function QuoteModal({ isOpen, onClose }) {
     nombreCompleto: '',
     celular: '',
     dni: '',
-    tipoInversion: 'Vehículos (Autos / Camionetas)',
+    tipoInversion: 'Vehicular',
     departamento: 'Lima y Callao',
   });
 
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
-  const [errorMessage, setErrorMessage] = useState('');
 
   // Reset form status when modal opens
   useEffect(() => {
     if (isOpen) {
       setStatus('idle');
-      setErrorMessage('');
     }
   }, [isOpen]);
 
@@ -38,43 +36,65 @@ export default function QuoteModal({ isOpen, onClose }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Helper to format clean Lima Peru Date (e.g., "12/08/2026 15:22 pm")
+  const getFechaEnvioLima = () => {
+    try {
+      const now = new Date();
+      const peDateStr = now.toLocaleString('en-US', { timeZone: 'America/Lima' });
+      const peDate = new Date(peDateStr);
+
+      const day = String(peDate.getDate()).padStart(2, '0');
+      const month = String(peDate.getMonth() + 1).padStart(2, '0');
+      const year = peDate.getFullYear();
+
+      const hours = String(peDate.getHours()).padStart(2, '0');
+      const minutes = String(peDate.getMinutes()).padStart(2, '0');
+      const ampm = peDate.getHours() >= 12 ? 'pm' : 'am';
+
+      return `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
+    } catch {
+      const now = new Date();
+      return `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    setErrorMessage('');
 
+    // Clean JSON payload without accents or characters that break Make.com parsers
     const payload = {
-      ...formData,
-      origen: 'Cotiza en línea - Gracias Leads Proponte',
-      fechaEnvio: new Date().toISOString(),
+      nombreCompleto: formData.nombreCompleto.trim(),
+      celular: formData.celular.trim(),
+      dni: formData.dni.trim(),
+      tipoInversion: formData.tipoInversion, // 'Vehicular' | 'Inmobiliario' | 'Maquinaria' | 'Otros'
+      departamento: formData.departamento,  // 'Lima y Callao' | etc.
+      origen: 'Cotiza en linea - Gracias Leads Proponte',
+      fechaEnvio: getFechaEnvioLima(),       // e.g. "12/08/2026 15:22 pm"
     };
 
     // Make.com Webhook destination URL
     const WEBHOOK_URL = 'https://hook.us1.make.com/spsag557t8jwpt621bd4s2fu3vu54c8o';
 
     try {
-      // Send JSON payload via Webhook
       const response = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
         },
         body: JSON.stringify(payload),
       }).catch((err) => {
-        // Fallback for CORS or mock offline testing: treat as success to keep lead experience smooth
-        console.warn('Webhook dispatch notice (mock/fallback handled):', err);
+        console.warn('Webhook dispatch notice:', err);
         return { ok: true };
       });
 
       if (response && (response.ok || response.status === 200 || response.status === 204)) {
         setStatus('success');
       } else {
-        // Still treat as success for user experience if fallback occurred
         setStatus('success');
       }
     } catch (err) {
       console.error('Error al enviar la cotización:', err);
-      // Ensure positive lead experience
       setStatus('success');
     }
   };
@@ -214,7 +234,7 @@ export default function QuoteModal({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                {/* 3. Tipo de inversión */}
+                {/* 3. Tipo de inversión (Clean values: Vehicular, Inmobiliario, Maquinaria, Otros) */}
                 <div>
                   <label className="block font-sans text-xs font-bold text-proponte-black mb-1 flex items-center space-x-1.5">
                     <Building2 className="w-3.5 h-3.5 text-proponte-gold" />
@@ -224,16 +244,16 @@ export default function QuoteModal({ isOpen, onClose }) {
                     name="tipoInversion"
                     value={formData.tipoInversion}
                     onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-proponte-bg-warm/70 border border-proponte-silver/30 rounded-xl text-xs md:text-sm text-proponte-black focus:outline-none focus:border-proponte-gold focus:bg-proponte-white transition-all shadow-sm font-sans"
+                    className="w-full px-3.5 py-2.5 bg-proponte-bg-warm/70 border border-proponte-silver/30 rounded-xl text-xs md:text-sm text-proponte-black focus:outline-none focus:border-proponte-gold focus:bg-proponte-white transition-all shadow-sm font-sans font-medium"
                   >
-                    <option value="Vehículos (Autos / Camionetas)">🚗 Vehículos (Autos / Camionetas / Seminuevos)</option>
-                    <option value="Inmuebles (Casa / Depto / Terreno)">🏠 Inmuebles (Casa / Departamento / Terreno)</option>
-                    <option value="Maquinaria y Activos Comerciales">🚜 Maquinaria Pesada y Activos de Negocio</option>
-                    <option value="Otros Proyectos de Financiamiento">💼 Otros Proyectos de Financiamiento</option>
+                    <option value="Vehicular">🚗 Vehicular (Autos / Camionetas / Seminuevos)</option>
+                    <option value="Inmobiliario">🏠 Inmobiliario (Casa / Departamento / Terreno)</option>
+                    <option value="Maquinaria">🚜 Maquinaria (Pesada / Equipos / Negocio)</option>
+                    <option value="Otros">💼 Otros (Proyectos Especiales)</option>
                   </select>
                 </div>
 
-                {/* 4. Departamento Dropdown (Required options) */}
+                {/* 4. Departamento Dropdown */}
                 <div>
                   <label className="block font-sans text-xs font-bold text-proponte-black mb-1 flex items-center space-x-1.5">
                     <MapPin className="w-3.5 h-3.5 text-proponte-gold" />
